@@ -26,27 +26,12 @@ setList_t* newNode(int a) {
     return temp;
 }
 void createLinkedList(setList_t** pList, int a) {
-    if ((*pList) != NULL) {
-        while ((*pList) != NULL) {
-            (*pList) = (*pList)->next;
-        }
+    if ((*pList) == NULL) {
         // Create new node
         setList_t *new_node = newNode(a);
-        new_node->next = (*pList);
-        (*pList) = new_node;
-    } else {
-        // Create new node
-        setList_t *new_node = newNode(a);
-        new_node->next = (*pList);
-        (*pList) = new_node;
-    }
-/*    if ((*pList) == NULL) {
-        // Create new node
-        setList_t *new_node = newNode(a);
-        new_node->next = (*pList);
         (*pList) = new_node;
     } else
-        createLinkedList(&(*pList)->next, a);*/
+        createLinkedList(&(*pList)->next, a);
 }
 setList_t* fillLinkedList(setList_t* pList, int T[], int n) {
     for (int i = 0; i < n; ++i) {
