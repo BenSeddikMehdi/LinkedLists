@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+
 #include <time.h>
 #include "Linked_Lists.h"
 
 #define N 10000
+
 int main() {
     node_t* firstNode = NULL;
     clock_t start = clock();
