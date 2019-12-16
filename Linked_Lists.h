@@ -5,71 +5,55 @@
 #ifndef LINKEDLISTS_LINKED_LISTS_H
 #define LINKEDLISTS_LINKED_LISTS_H
 
-#include <stdlib.h>
+typedef struct p_node {
+    uint32_t data;
+    struct p_node* next;
+} node_t;
 
-typedef struct setList {
-    int data;
-    struct setList *next;
-} setList_t;
-
-void do_create_linked_list(void (*op) (setList_t**, int),
-                           setList_t** pList, int a) {
-    op(pList, a);
+void do_create_node(void (*op) (node_t**, uint32_t),
+                        node_t** pNode, uint32_t value) {
+    op(pNode, value);
 }
 
-setList_t* newNode(int a) {
-    setList_t* temp = malloc(sizeof(setList_t));
-    if (temp == NULL)
+node_t* new_node(int value) {
+    node_t* node = malloc(sizeof(node_t)); 
+    if (node == NULL) {
+        printf("Memory not Allocated !\n");
         return NULL;
-    temp->data = a;
-    temp->next = NULL;
-    return temp;
-}
-void createLinkedList(setList_t** pList, int a) {
-    if ((*pList) == NULL) {
-        // Create new node
-        setList_t *new_node = newNode(a);
-        (*pList) = new_node;
-    } else
-        createLinkedList(&(*pList)->next, a);
-}
-setList_t* fillLinkedList(setList_t* pList, int T[], int n) {
-    for (int i = 0; i < n; ++i) {
-        do_create_linked_list(createLinkedList, &pList, T[i]);
     }
-    return pList;
-}
-void printLinkedList(setList_t* pList) {
-    printf("List Number: ");
-    while (pList != NULL) {
-        printf("%d ", pList->data);
-        pList = pList->next;
-    }
-    printf("\n");
+    node->data = value;
+    node->next = NULL;
+    return node;
 }
 
-setList_t* do_inserting_value(setList_t* (*op) (setList_t*, setList_t*, int),
-                              setList_t* pList, setList_t* p, int value) {
-    return op(pList, p, value);
-}
-setList_t* insertingValue(setList_t* pList, setList_t *p ,int value) {
-    if (pList != NULL) {
-        if (pList->next != NULL) {
-            if (value < pList->data) {
-                p = newNode(value);
-                p->next = pList;
-                pList = p;
-            } else if (value > pList->data && value < pList->next->data) {
-                p = pList->next;
-                pList->next = newNode(value);
-                pList->next->next = p;
-            } else
-                insertingValue(pList->next, p, value);
-        } else
-            pList->next = newNode(value);
+void create_node(node_t** pNode, uint32_t value) {
+    node_t* prev = NULL, *curr = *pNode;
+    if (curr != NULL) {
+        while (curr != NULL) {
+            prev = curr;
+            curr = curr->next;
+        }
+        prev->next = new_node(value);
     } else
-        pList = newNode(value);
-    return pList;
+        (*pNode) = new_node(value);
+}
+
+void printData(node_t* p_node) {
+    uint32_t i = 0;
+    while (p_node != NULL) {
+        printf("data:= %d\n", p_node->data);
+        p_node = p_node->next;
+        i++;
+    }
+}
+
+uint32_t findData(node_t* p_node, uint32_t data) {
+    while (p_node != NULL) {
+        if (p_node->data == data)
+            return p_node->data;
+        p_node = p_node->next;
+    }
+    return 0;
 }
 
 
