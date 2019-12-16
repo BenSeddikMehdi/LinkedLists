@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #include <time.h>
-#include "Linked_Lists.h"
+#include "Single_Linked_Lists.h"
 
 #define N 10000
 
