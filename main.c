@@ -5,7 +5,7 @@
 #include <time.h>
 #include "Single_Linked_Lists.h"
 
-#define N 10000
+#define N 4
 
 int main() {
     node_t* firstNode = NULL;
